@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intealegend Landing Page by Devid</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        .logo img {
+            width: 400px;
+            height: auto;
+            position: relative;
+            left: -100px;
+            top: 40px;
+        }
+        .menu {
+            display: inline-block;
+            margin-right: 20px;
+            position: relative;
+            left: 300px;
+        }
+        .register {
+            display: inline-block;
+        }
+        .h-text h1 {
+            white-space: nowrap;
+        }
+        .h-text h2 {
+            font-size: 16px;
+            font-weight: lighter;
+        }
+        .h-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+        .h-text a {
+            position: relative;
+            top: 20px;
+        }
+        .registration-form {
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .form-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            position: relative;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .input-box {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .input-box input, .input-box select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .checkbox input {
+            margin-right: 10px;
+        }
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgb(71, 165, 43); /* Updated background color */
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .register-btn:hover {
+            background: darkgreen; /* Updated hover color */
+        }
+        .social-login {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .social-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .google-btn {
+            background: white;
+            border: 1px solid #ccc;
+        }
+        .apple-btn {
+            background: black;
+            color: white;
+        }
+        .social-btn img {
+            margin-right: 10px;
+        }
+        .google-btn img {
+            width: 30px;
+        }
+        .apple-btn img {
+            width: 20px;
+        }
+        .products {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow-y: auto; /* Add vertical scroll bar */
+            max-height: 80vh; /* Adjust height as needed */
+        }
+        .product-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .product-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .product-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-to-cart {
+            background: #007BFF;
+            color: #fff;
+        }
+        .buy-now {
+            background:rgb(71, 165, 43);
+            color: #fff;
+        }
+        header {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+        #backgroundVideo.fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        #backgroundVideo.fade-in {
+            opacity: 1;
+            transition: opacity 1s ease-in;
+        }
+        #buyerForm {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #buyerForm.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="video-container">
+            <video autoplay muted loop id="backgroundVideo">
+                <source src="Tea 3.webm" type="video/webm">
+                <source src="Tea.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="Logo" style="width: 400px; height: auto;">
+            </div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="#" id="productsButton">Products</a>
+                <a href="#">Shop</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="register">
+                <a href="#" id="registerButton">Register</a>
+            </div>
+        </nav>
+        <section class="h-text">
+            <h1>WELCOME TO INTEALEGEND<h1>
+            <h2>Intealegend India is a premier platform for buying and selling tea lots, connecting growers, 
+                traders, and buyers seamlessly. 
+                Register now to explore, trade, and elevate your tea business with transparency and ease.
+            </h2>
+            <br>
+            <a href="#" id="visitNowButton">Visit Now</a>
+        </section>
+    </header>
+
+    <!-- Registration Form -->
+    <div class="registration-form" id="registrationForm">
+        <div class="form-container" id="formContainer">
+            <button class="close-btn" id="closeFormButton">&times;</button>
+            <h2>Register</h2>
+            <form id="registerForm">
+                <div class="input-box">
+                    <label>Select Role:</label>
+                    <select id="roleSelect" required>
+                        <option value="">Select Role</option>
+                        <option value="buyer">Buyer</option>
+                        <option value="seller">Seller</option>
+                        <option value="operator">Operator</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Accept Terms & Conditions</label>
+                </div>
+                <button type="submit" class="register-btn">Register</button>
+                <div class="social-login">
+                    <p>or</p>
+                    <button class="social-btn google-btn">
+                        <img src="google-icon.png" alt="Google"> Sign up with Google
+                    </button>
+                    <button class="social-btn apple-btn">
+                        <img src="apple-icon.png" alt="Apple"> Sign up with Apple
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Buyer Registration Form -->
+    <div id="buyerForm" style="display: none;">
+        <h3>Buyer Registration</h3>
+        <div class="input-box">
+            <label>Name of Business</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>Address</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>State</label>
+            <select>
+                <option>Select State</option>
+            </select>
+        </div>
+        <div class="input-box">
+            <label>District</label>
+            <select>
+                <option>Select District</option>
+            </select>
+        </div>
+        <div class="input-box">
+            <label>Pincode</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>Name of Key Person</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>Contact No</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>Email ID</label>
+            <input type="email">
+        </div>
+        <div class="input-box">
+            <label>PAN No</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>GST No</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>TMCO No</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>FSSAI No</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>Password</label>
+            <input type="password">
+        </div>
+        <div class="input-box">
+            <label>Bank A/C No</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>Bank IFSC No</label>
+            <input type="text">
+        </div>
+        <div class="input-box">
+            <label>Name of Transport</label>
+            <input type="text">
+        </div>
+        <button id="registerBtn" class="register-btn">Register</button>
+        <button id="backBtn" class="register-btn">Back</button>
+    </div>
+
+    <div class="products" id="productsSection">
+        <button class="close-btn" id="closeProductsButton">&times;</button>
+        <div class="product-container">
+            <div class="product-card">
+                <img src="product1.jpg" alt="Product 1">
+                <h3>Premium Assam Tea</h3>
+                <p>Rich and robust flavor from the finest Assam tea leaves.</p>
+                <span class="price">$10.99</span>
+                <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="product2.jpg" alt="Product 2">
+                <h3>Darjeeling Black Tea</h3>
+                <p>Exquisite Darjeeling tea with a unique muscatel flavor.</p>
+                <span class="price">$15.99</span>
+                <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="product3.jpg" alt="Product 3">
+                <h3>Green Tea Blend</h3>
+                <p>A refreshing blend of green tea with herbs.</p>
+                <span class="price">$12.49</span>
+                <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('backgroundVideo');
+        const sources = ['Tea 3.webm', 'Tea.webm']; // Ensure correct paths
+        let currentSourceIndex = 0;
+
+        function switchVideo() {
+            video.classList.add('fade-out');
+            setTimeout(() => {
+                currentSourceIndex = (currentSourceIndex + 1) % sources.length;
+                let newSource = document.createElement('source');
+                newSource.src = sources[currentSourceIndex];
+                newSource.type = "video/webm";
+                
+                video.innerHTML = ""; // Clear existing sources
+                video.appendChild(newSource);
+                video.load();
+                
+                video.oncanplay = () => {
+                    video.play();
+                    video.classList.remove('fade-out');
+                    video.classList.add('fade-in');
+                };
+            }, 1000); // Match CSS transition duration
+        }
+
+        video.addEventListener('ended', switchVideo);
+
+        // Start first video properly
+        let initialSource = document.createElement('source');
+        initialSource.src = sources[currentSourceIndex];
+        initialSource.type = "video/webm";
+        video.appendChild(initialSource);
+        video.load();
+        video.play();
+
+        document.getElementById('visitNowButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.location.href = 'https://www.instagram.com/_devidd.0?igsh=ZmFsMmU1dXUxNTd5'; // Replace with your target URL
+        });
+
+        document.getElementById('registerButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            var formContainer = document.getElementById('formContainer');
+            document.getElementById('registrationForm').style.display = 'flex';
+            setTimeout(function() {
+                formContainer.classList.remove('hide');
+                formContainer.classList.add('show');
+            }, 10); // Small delay to trigger the transition
+        });
+
+        document.getElementById('closeFormButton').addEventListener('click', function() {
+            var formContainer = document.getElementById('formContainer');
+            formContainer.classList.remove('show');
+            formContainer.classList.add('hide');
+            setTimeout(function() {
+                document.getElementById('registrationForm').style.display = 'none';
+            }, 500); // Match the transition duration
+        });
+
+        document.getElementById('productsButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('productsSection').style.display = 'block';
+            document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('closeProductsButton').addEventListener('click', function() {
+            document.getElementById('productsSection').style.display = 'none';
+        });
+
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
+            alert("Registration Successful! (Backend logic needed)");
+        });
+
+        // Detect swipe up to show products
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        function handleGesture() {
+            if (touchStartY - touchEndY > 50) { // Swipe up detected
+                document.getElementById('productsSection').style.display = 'block';
+                document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('touchstart', function(event) {
+            touchStartY = event.changedTouches[0].screenY;
+        }, false);
+
+        document.addEventListener('touchend', function(event) {
+            touchEndY = event.changedTouches[0].screenY;
+            handleGesture();
+        }, false);
+
+        // Detect scroll down to show products
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) { // Adjust the value as needed
+                document.getElementById('productsSection').style.display = 'block';
+                document.getElementById('productsSection').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Show buyer form based on role selection
+        document.getElementById("roleSelect").addEventListener("change", function() {
+            var buyerForm = document.getElementById("buyerForm");
+            var registerBtn = document.getElementById("registerBtn");
+            var backBtn = document.getElementById("backBtn");
+
+            if (this.value === "buyer") {
+                buyerForm.style.display = "block"; // Show buyer fields
+                registerBtn.style.backgroundColor = "rgb(71, 165, 43)"; // Change button color to green
+                backBtn.style.backgroundColor = "rgb(71, 165, 43)";
+            } else {
+                buyerForm.style.display = "none"; // Hide buyer fields
+                registerBtn.style.backgroundColor = ""; // Reset to default
+                backBtn.style.backgroundColor = "";
+            }
+        });
+    </script>
+</body>
+</html>

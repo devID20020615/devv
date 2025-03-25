@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label>Select Role:</label>
+            <select required>
+                <option value="">Select Role</option>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+                <option value="operator">Operator</option>
+                <option value="admin">Admin</option>
+            </select>
+            
+            <button type="submit" class="btn register">Register</button>
+            <a href="index.html" class="btn back">Back</a>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
+            alert("Registration Successful! (Backend logic needed)");
+        });
+    </script>
+</body>
+</html>
